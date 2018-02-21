@@ -1,0 +1,31 @@
+Sub Total_Volume()
+Dim ticker As String
+Dim total As Double
+
+For Each ws In Worksheets
+total = 0
+LastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+ws.Range("I1").Value = "Ticker"
+ws.Range("J1").Value = "Total_Volume"
+
+j = 2
+
+For i = 2 To LastRow
+
+  'check if cells same
+  If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+       ws.Cells(j, 9).Value = ws.Cells(i, 1).Value
+       ws.Cells(j, 10).Value = total
+       j = j + 1
+       total = 0
+  Else
+      total = total + ws.Cells(i, 7).Value
+  End If
+ 
+Next i
+
+'next worksheet
+Next ws
+
+End Sub
